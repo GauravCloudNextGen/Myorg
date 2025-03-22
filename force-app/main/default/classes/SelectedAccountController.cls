@@ -7,8 +7,8 @@ global with sharing class SelectedAccountController {
         // Get the selected IDs from the URL parameters
         RestRequest req = RestContext.request;
         String idsParam = req.requestURI.substring(req.requestURI.lastIndexOf('/') + 1);
-        system.debug('hi changes made using 1st branch');
-        
+        system.debug('hi changes made using 1st    branch');
+        system.debug('hi changes made using 2nd branch');
         // Split the comma-separated IDs into a list
         List<String> selectedIds = idsParam.split(',');
         
