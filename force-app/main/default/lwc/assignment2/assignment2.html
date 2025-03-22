@@ -1,0 +1,75 @@
+<template>
+    <lightning-card title="Student Information">
+        <lightning-layout class="slds-align_absolute-center">
+            <lightning-layout-item title="School" size="4">
+                <lightning-record-picker object-api-name="School__c" label="School"
+                    placeholder="---PLease Select School---" display-info={displayInfoSchool}
+                    onchange={handleChangeSchool}></lightning-record-picker>
+            </lightning-layout-item>
+            <lightning-layout-item title="Class" size="4" class="slds-m-left_medium">
+                <lightning-record-picker object-api-name="Class__c" label="Class"
+                    placeholder="---PLease Select Class---" display-info={displayInfoClass} filter={filter}
+                    onchange={handleChangeClass}></lightning-record-picker>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout class="slds-m-top_medium">
+            <lightning-layout-item>
+                <lightning-button label="New" onclick={createRecord}></lightning-button>
+            </lightning-layout-item>
+            <lightning-layout-item class="slds-m-left_medium">
+                <lightning-button variant="destructive" label="Delete" onclick={deleteRec}></lightning-button>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout>
+            <lightning-layout-item>
+                <lightning-datatable key-field=Id data={params} columns={columns} onrowaction={handleRowAction} onrowselection={handleRowSelection}></lightning-datatable>
+            </lightning-layout-item>
+            <template if:true={editRecord}>
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                    aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <header class="slds-modal__header">
+                            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                                title="Close" onclick={hideModalBox}>
+                                <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                                    size="small"></lightning-icon>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                            <h2 id="modal-heading-2" class="slds-text-heading_medium slds-hyphenate">Edit Student
+                            </h2>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+                            <p>Edit Student</p>
+                            <lightning-record-form record-id={recordId} object-api-name='Student__c' fields={fields}
+                                columns="1" mode="edit" onsubmit={handleSubmit} oncancel={hideModalBox}>
+                            </lightning-record-form>
+                        </div>
+                    </div>
+                </section>
+            </template>
+            <template if:true={create}>
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                    aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <header class="slds-modal__header">
+                            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                                title="Close" onclick={hideModalBox}>
+                                <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                                    size="small"></lightning-icon>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Create New Student
+                            </h2>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                            <p>Create New Student</p>
+                            <lightning-record-form object-api-name="Student__c" fields={selectedFields} columns="1"
+                                mode="edit" onsuccess={handleSuccess} oncancel={hideModalBox}>
+                            </lightning-record-form>
+                        </div>
+                    </div>
+                </section>
+            </template>
+        </lightning-layout>
+    </lightning-card>
+</template>

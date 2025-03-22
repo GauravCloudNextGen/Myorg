@@ -1,0 +1,19 @@
+<template>
+    <lightning-card title="Wrapper Records Data Table">
+        <div class="slds-p-around_medium">
+            <lightning-button label="Load Records" onclick={loadRecords} variant="brand"></lightning-button>
+        </div>
+        
+        <template if:true={records.length}>
+            <lightning-datatable 
+                key-field="recordId"
+                data={records}
+                columns={columns}>
+            </lightning-datatable>
+        </template>
+
+        <template if:true={error}>
+            <p class="slds-text-color_error">{error}</p>
+        </template>
+    </lightning-card>
+</template>

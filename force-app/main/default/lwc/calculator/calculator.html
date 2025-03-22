@@ -1,0 +1,29 @@
+<template>
+    <lightning-card title="Calculator By Gaurav" icon-name="standard:number_input">
+        <div class="slds-p-around_small">
+            <lightning-input label="First Number" type="number" name="Number1" value={number1}
+                step="any" onchange={inputNumber} required>
+            </lightning-input><br>
+
+            <lightning-input label="Second Number" type="number" name="Number2" value={number2}
+                step="any" onchange={inputNumber} required>
+            </lightning-input><br>
+
+            <lightning-layout horizontal-align="space">
+                <lightning-layout-item padding="around-small">
+                    <lightning-button label="Add" variant="Brand" onclick={calculateResult}></lightning-button>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small">
+                    <lightning-button label="Subtract" variant="Brand" onclick={calculateResult}></lightning-button>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small">
+                    <lightning-button label="Multiply" variant="Brand" onclick={calculateResult}></lightning-button>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small">
+                    <lightning-button label="Divide" variant="Brand" onclick={calculateResult}></lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>
+            <p>Result = {result}</p>
+        </div>
+    </lightning-card>
+</template>

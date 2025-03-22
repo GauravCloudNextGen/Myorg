@@ -1,0 +1,21 @@
+.lookup-dropdown {
+    position: absolute;
+    width: 100%;
+    background: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    max-height: 250px;
+    overflow-y: auto;
+    z-index: 10;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.record-option {
+    padding: 8px;
+    cursor: pointer;
+    display: block;
+}
+
+.record-option:hover {
+    background: #f4f4f4;
+}

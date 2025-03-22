@@ -1,0 +1,18 @@
+<template>
+    <lightning-card title="Opportunity List View Action">
+        <lightning-button 
+            label="Process Selected Records" 
+            onclick={handleProcessRecords} 
+            variant="brand" 
+            class="slds-m-bottom_small">
+        </lightning-button>
+
+        <lightning-datatable 
+            key-field="Id" 
+            data={opportunities} 
+            columns={columns} 
+            onrowselection={handleRowSelection} 
+            hide-checkbox-column="false">
+        </lightning-datatable>
+    </lightning-card>
+</template>

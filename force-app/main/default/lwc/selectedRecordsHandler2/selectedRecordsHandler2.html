@@ -1,0 +1,14 @@
+<template>
+    <lightning-card title="Selected Records">
+        <template if:true={recordIds}>
+            <ul>
+                <template for:each={recordIds} for:item="recordId">
+                    <li key={recordId}>{recordId}</li>
+                </template>
+            </ul>
+        </template>
+        <template if:false={recordIds}>
+            <p>No records selected.</p>
+        </template>
+    </lightning-card>
+</template>

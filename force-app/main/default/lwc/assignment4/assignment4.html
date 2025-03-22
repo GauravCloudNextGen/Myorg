@@ -1,0 +1,15 @@
+<template>
+    <lightning-card title="Student Information">
+        <lightning-layout class="slds-p-around_medium">
+            <lightning-layout-item size="8">
+                <lightning-input placeholder="-- Type Number of Student Records --" type="number" required onchange={inputNumber}></lightning-input>
+            </lightning-layout-item>
+            <lightning-layout-item class="slds-m-top_medium slds-m-left_medium">
+                <lightning-button label="Search" onclick={showResult}></lightning-button>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-datatable key-field=Id data={params} columns={columns} hide-checkbox-column="true"
+            show-row-number-column="true">
+        </lightning-datatable>
+    </lightning-card>
+</template>

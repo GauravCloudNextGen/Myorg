@@ -1,0 +1,42 @@
+<template>
+    <lightning-card title="Account & Contact Lookup">
+        <div class="slds-p-around_medium">
+
+            <!-- Selected Account or Contact as a Pill -->
+            <template if:true={showPill}>
+                <lightning-pill 
+                    label={searchKey} 
+                    onremove={handleReset}>
+                </lightning-pill>
+            </template>
+
+            <!-- Lookup Input Field -->
+            <template if:false={showPill}>
+                <lightning-input 
+                    type="text" 
+                    label={placeholderText} 
+                    placeholder="Click to view records..." 
+                    onfocus={handleInputClick} 
+                    readonly>
+                </lightning-input>
+            </template>
+
+            <!-- Dropdown List -->
+            <template if:true={showDropdown}>
+                <div class="lookup-dropdown">
+                    <template for:each={records} for:item="rec">
+                        <div 
+                            key={rec.Id} 
+                            class="slds-p-around_x-small slds-text-link record-option" 
+                            data-id={rec.Id} 
+                            data-name={rec.Name} 
+                            onclick={handleRecordSelect}>
+                            {rec.Name} {recordTypeLabel}
+                        </div>
+                    </template>
+                </div>
+            </template>
+
+        </div>
+    </lightning-card>
+</template>

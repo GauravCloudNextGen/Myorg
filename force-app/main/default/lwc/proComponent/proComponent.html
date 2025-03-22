@@ -1,0 +1,66 @@
+<template>
+    <lightning-card title="Two Dropdowns and Record Fetcher">
+        <!-- Dropdowns (Side by Side) -->
+        <div class="slds-grid slds-grid_align-spread">
+            <!-- Left Dropdown -->
+            <div class="slds-col slds-size_1-of-2">
+                <lightning-combobox
+                    label="Left Dropdown"
+                    value={leftValue}
+                    options={leftOptions}
+                    onchange={handleLeftDropdownChange}>
+                </lightning-combobox>
+            </div>
+
+            <!-- Right Dropdown -->
+            <div class="slds-col slds-size_1-of-2">
+                <lightning-combobox
+                    label="Right Dropdown"
+                    value={rightValue}
+                    options={rightOptions}
+                    onchange={handleRightDropdownChange}>
+                </lightning-combobox>
+            </div>
+        </div>
+
+        <!-- Inputs (Stacked Below) -->
+        <div class="slds-m-top_medium">
+            <lightning-input 
+                label="Enter Record IDs (comma-separated)" 
+                value={recordIds} 
+                onchange={handleRecordIdsChange}>
+            </lightning-input>
+
+            <lightning-input 
+                label="Enter Field Names (comma-separated)" 
+                value={fieldNames} 
+                onchange={handleFieldNamesChange}>
+            </lightning-input>
+            <div class="slds-col slds-size_1-of-1 slds-p-around_small">
+                <lightning-button 
+                    label="Fetch Records" 
+                    onclick={fetchRecords}>
+                </lightning-button>
+            </div>
+        </div>
+
+        <!-- Datatable -->
+        <div class="slds-m-top_medium">
+            <lightning-datatable 
+                key-field="Id" 
+                data={records} 
+                columns={columns} 
+                onrowselection={handleRowSelection}>
+            </lightning-datatable>
+        </div>
+
+        <!-- Print Selected IDs Button -->
+        <div class="slds-m-top_medium">
+            <lightning-button 
+                label="Print Selected IDs" 
+                variant="brand" 
+                onclick={printSelectedIds}>
+            </lightning-button>
+        </div>
+    </lightning-card>
+</template>
