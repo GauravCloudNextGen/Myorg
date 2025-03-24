@@ -2,6 +2,7 @@
 global with sharing class SelectedAccountController {
 
     // This method handles the GET request to fetch account details by IDs
+    // main changes
     @HttpGet
     global static String getSelectedAccounts() {
         // Get the selected IDs from the URL parameters
