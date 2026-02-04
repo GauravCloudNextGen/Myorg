@@ -3,7 +3,7 @@ public class ContactTriggerHandler {
     {
          ContactTriggerHelper.PrimaryContact(triggerNew,triggerNewMap,triggerOld,triggerOldMap);
          ContactTriggerHelper.CreateAccount(triggerNew,triggerNewMap,triggerOld,triggerOldMap);
-         ContactTriggerHelper.Sync(triggerNew,triggerNewMap,triggerOld,triggerOldMap); 
+        ContactTriggerHelper.Sync(triggerNew,triggerNewMap,triggerOld,triggerOldMap); 
 	}
    	public static void beforeUpdate(List<Contact>triggerNew,Map<Id,Contact>triggerNewMap,List<Contact>triggerOld,Map<Id,Contact>triggerOldMap)
     {  

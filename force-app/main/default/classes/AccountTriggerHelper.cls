@@ -174,7 +174,7 @@ public class AccountTriggerHelper {
     {
         List<Contact>accountContacts = [SELECT Name,AccountId,LastModifiedDate,Account.Name,Account.LastModifiedDate FROM Contact WHERE AccountId IN : triggerNewMap.KeySet()];
         List<Messaging.SingleEmailMessage> mails = new List<Messaging.SingleEmailMessage>();
-        //System.debug(accountContacts);
+        System.debug(accountContacts);
         for(Account ac : TriggerOld)
         {
             Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
@@ -197,6 +197,7 @@ public class AccountTriggerHelper {
            			mails.add(mail);
                 }
         }
+        System.debug(mails);
         Messaging.sendEmail(mails);
     }
 }

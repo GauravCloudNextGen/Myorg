@@ -35,13 +35,18 @@
                                     size="small"></lightning-icon>
                                 <span class="slds-assistive-text">Close</span>
                             </button>
-                            <h2 id="modal-heading-2" class="slds-text-heading_medium slds-hyphenate">Edit Student
-                            </h2>
+                            <h2 id="modal-heading-2" class="slds-text-heading_medium slds-hyphenate">Edit Student</h2>
                         </header>
                         <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
                             <p>Edit Student</p>
-                            <lightning-record-form record-id={recordId} object-api-name='Student__c' fields={fields}
-                                columns="1" mode="edit" onsubmit={handleSubmit} oncancel={hideModalBox}>
+                            <lightning-record-form 
+                                record-id={recordId} 
+                                object-api-name='Student__c' 
+                                fields={fields}
+                                columns="1" 
+                                mode="edit" 
+                                onsuccess={handleEditSuccess}
+                                oncancel={hideModalBox}>
                             </lightning-record-form>
                         </div>
                     </div>
@@ -58,13 +63,17 @@
                                     size="small"></lightning-icon>
                                 <span class="slds-assistive-text">Close</span>
                             </button>
-                            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Create New Student
-                            </h2>
+                            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Create New Student</h2>
                         </header>
                         <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
                             <p>Create New Student</p>
-                            <lightning-record-form object-api-name="Student__c" fields={selectedFields} columns="1"
-                                mode="edit" onsuccess={handleSuccess} oncancel={hideModalBox}>
+                            <lightning-record-form 
+                                object-api-name="Student__c" 
+                                fields={selectedFields} 
+                                columns="1"
+                                mode="edit" 
+                                onsuccess={handleSuccess}
+                                oncancel={hideModalBox}>
                             </lightning-record-form>
                         </div>
                     </div>

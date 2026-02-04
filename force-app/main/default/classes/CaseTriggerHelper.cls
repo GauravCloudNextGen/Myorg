@@ -166,19 +166,21 @@ public class CaseTriggerHelper {
                 Contact conNew = new Contact(LastName = 'ContactByCase');
             	contactToInsert.add(conNew);
             	linkContact.put(c,conNew);
+                system.debug('Contact inserted');
             }
         }
         if(contactToInsert!=null && contactToInsert.size()>0)
         insert contactToInsert;
         //system.debug('Contact inserted');
+        System.debug(linkContact.size());
+        System.debug(linkContact.KeySet());
         if(linkContact!=null && linkContact.size()>0)
         {
-            //System.debug('in');
            for(Case c : linkContact.KeySet())
         	{
-                //System.debug('inin');
+                System.debug('inin');
             	Id ContactId = linkContact.get(c).Id;
-            	//System.debug(ContactId);
+            	System.debug(ContactId);
             	c.ContactId = ContactId;
         	} 
         }

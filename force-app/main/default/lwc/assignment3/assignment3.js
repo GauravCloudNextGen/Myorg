@@ -31,6 +31,11 @@ export default class Assignment3 extends LightningElement {
         this.params = await getData({ recId:event.detail.recordId});
     }
     selectedFields = [Name, Product__c, Min__c, Max__c, Price__c];
+    async updateTable() {
+        if(this.productId){
+            this.params = await getData({ recId:this.productId});
+        }
+    }
     handleSuccess() {
         this.newRec = false;
         this.dispatchEvent(new ShowToastEvent({
@@ -39,5 +44,6 @@ export default class Assignment3 extends LightningElement {
             variant: "success"
         }),
         );
+        return this.updateTable();
     }
 }

@@ -16,6 +16,7 @@ export default class WrapperDataTable extends LightningElement {
         fetchWrapperRecords()
             .then(result => {
                 this.records = result;
+                console.log(this.records);
                 this.error = undefined;
             })
             .catch(error => {

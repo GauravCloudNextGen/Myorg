@@ -1,4 +1,4 @@
-import { LightningElement,wire,api,track} from 'lwc';
+import { LightningElement, wire, api, track } from 'lwc';
 import userInfo from '@salesforce/apex/UserData.userInfo';
 import FirstName from '@salesforce/schema/User.FirstName';
 import LastName from '@salesforce/schema/User.LastName';
@@ -21,8 +21,8 @@ export default class Assignment1 extends LightningElement {
     @wire(userInfo)
     wiredCallback(result) {
         this.wiredResult = result;
-        refreshApex(this.wiredResult);
-        const {data,error} = result;
+        //refreshApex(this.wiredResult);
+        const { data, error } = result;
         if (data) {
             this.params = data;
             this.error = undefined;
@@ -32,36 +32,36 @@ export default class Assignment1 extends LightningElement {
             this.params = undefined;
         }
     }
-    create=false;
+    create = false;
     @api recordId;
     editRecord = false;
     columns = [
-        { label:'Name',fieldName:'Name' },
-        { label:'UserName',fieldName:'UserName' },
-        { label:'IsActive', fieldName:'IsActive'},
-        {label:'Email',fieldName:'Email'},
-        { 
-            label: 'Actions', 
-            type: 'button', 
-            typeAttributes: { label: 'Edit', value: 'edit_user' } 
+        { label: 'Name', fieldName: 'Name' },
+        { label: 'UserName', fieldName: 'UserName' },
+        { label: 'IsActive', fieldName: 'IsActive' },
+        { label: 'Email', fieldName: 'Email' },
+        {
+            label: 'Actions',
+            type: 'button',
+            typeAttributes: { label: 'Edit', value: 'edit_user' }
         }
     ];
 
-    createNewUser(Event){
+    createNewUser(Event) {
         this.create = true
         console.log(this.create);
     }
 
-    selectedFields=[FirstName,LastName,Alias,UserName,Nickname,Email,TimeZoneSidKey,LocaleSidKey,EmailEncodingKey,ProfileId,LanguageLocaleKey];
-    fields=[FirstName,LastName,Email,IsActive];
+    selectedFields = [FirstName, LastName, Alias, UserName, Nickname, Email, TimeZoneSidKey, LocaleSidKey, EmailEncodingKey, ProfileId, LanguageLocaleKey];
+    fields = [FirstName, LastName, Email, IsActive];
 
-    hideModalBox(event){
+    hideModalBox(event) {
         this.create = false;
         this.editRecord = false;
     }
 
-    handleRowAction(event){
-        if (event.detail.action.value === 'edit_user'){
+    handleRowAction(event) {
+        if (event.detail.action.value === 'edit_user') {
             this.getUpdatedData()
             this.editRecord = true;
             console.log('open edit ' + this.editRecord);
@@ -69,35 +69,39 @@ export default class Assignment1 extends LightningElement {
         }
     }
 
-    handleSuccess(){
-             if(this.recordId != null){
-                refreshApex(this.wiredResult);
-                this.create = false;
-                this.dispatchEvent(new ShowToastEvent({
-                        title: "SUCCESS!",
-                        message: "New record has been created.",
-                        variant: "success",
-                    }),  
-                );
-                refreshApex(this.wiredResult);
-            }
+    handleSuccess() {
+        if (this.recordId != null) {
+            this.create = false;
+            this.dispatchEvent(new ShowToastEvent({
+                title: "SUCCESS!",
+                message: "New record has been created.",
+                variant: "success",
+            }),
+            );
         }
-
-        handleSubmit(){
-            if(this.recordId != null){
-                refreshApex(this.wiredResult);
-                console.log(this.wiredResult);
-                this.editRecord = false;
-                this.dispatchEvent(new ShowToastEvent({
-                       title: "SUCCESS!",
-                       message: "Record has been Updated.",
-                       variant: "success"
-                   }),
-               );
-               refreshApex(this.wiredResult);
-            }
-       }   
-       getUpdatedData(event){
-        refreshApex(this.wiredResult);
-       } 
+        refreshApex(this.wiredResult);  
     }
+
+    // Modified handleSubmit to properly handle form submission and refresh
+    /*handleSubmit(event) {
+        event.preventDefault(); // Added to prevent default form submission
+        const fields = event.detail.fields;
+        
+        // Added success handler for edit form submission
+        this.template.querySelector('lightning-record-form').submit(fields);
+    }*/
+
+    // Added new method to handle successful edit submission
+    handleEditSuccess() {
+        this.editRecord = false;
+        this.dispatchEvent(new ShowToastEvent({
+            title: "SUCCESS!",
+            message: "Record has been Updated.",
+            variant: "success"
+        }));
+        return refreshApex(this.wiredResult); // Changed to return the promise
+    }
+    getUpdatedData(event) {
+        refreshApex(this.wiredResult);
+    }
+}

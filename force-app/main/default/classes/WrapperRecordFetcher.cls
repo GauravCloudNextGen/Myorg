@@ -26,7 +26,7 @@ public with sharing class WrapperRecordFetcher {
         } catch (Exception e) {
             System.debug('⚠️ Error in fetchWrapperRecords: ' + e.getMessage());
         }
-
+		System.debug(result);
         return result;
     }
 }

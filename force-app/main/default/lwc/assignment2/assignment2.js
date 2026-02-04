@@ -1,4 +1,4 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api , track} from 'lwc';
 import getData from '@salesforce/apex/StudentData.getData';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import Name from '@salesforce/schema/Student__c.Name';
@@ -12,7 +12,7 @@ export default class Assignment2 extends LightningElement {
     refreshTable;
     filter = '';
     ClassId = '';
-    params = '';
+    @track params = [];
     editRecord = false;
     create = false;
     @api recordId;
@@ -97,17 +97,25 @@ export default class Assignment2 extends LightningElement {
         this.editRecord = false;
         this.create = false;
     }
-    handleSubmit() {
-        if (this.recordId != null) {
-            refreshApex(this.params);
-            this.editRecord = false;
-            this.dispatchEvent(new ShowToastEvent({
-                title: "SUCCESS!",
-                message: "Record has been Updated.",
-                variant: "success"
-            }),
-            );
+    async refreshData() {
+        if (this.ClassId) {
+            try {
+                this.params = await getData({ recId: this.ClassId });
+                console.log('Refreshed params:', this.params);
+            } catch (error) {
+                console.error('Error refreshing data:', error);
+                this.params = [];
+            }
         }
+    }
+    handleEditSuccess() {
+        this.editRecord = false;
+        this.dispatchEvent(new ShowToastEvent({
+            title: "SUCCESS!",
+            message: "Record has been Updated.",
+            variant: "success"
+        }));
+        return this.refreshData(); // Refresh data after edit
     }
     handleSuccess() {
         this.create = false;
@@ -117,6 +125,7 @@ export default class Assignment2 extends LightningElement {
             variant: "success"
         }),
         );
+        return this.refreshData();
     }
     createRecord() {
         this.create = true;

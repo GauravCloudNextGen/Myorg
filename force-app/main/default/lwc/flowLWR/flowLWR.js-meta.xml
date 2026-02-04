@@ -1,0 +1,12 @@
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata" fqn="yourComponent">
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="Assignment_1" type="String" label="Assignment_1" description="Enter the API name of the Flow to display."/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
