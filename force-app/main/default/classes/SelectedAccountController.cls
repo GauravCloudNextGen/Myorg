@@ -2,9 +2,11 @@
 global with sharing class SelectedAccountController {
 
     // This method handles the GET request to fetch account details by IDs
+    // main changes
     @HttpGet
     global static String getSelectedAccounts() {
         // Get the selected IDs from the URL parameters
+        // 2nd change
         RestRequest req = RestContext.request;
         String idsParam = req.requestURI.substring(req.requestURI.lastIndexOf('/') + 1);
         system.debug('hi changes made using 1st    branch');
